@@ -1,1 +1,52 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: ddl-tables-001
+      author: Angie20000
+      labels: "HU-BOOK-001,ddl,tables"
+      comment: "reservation: the Reserva aggregate, with the INV-001 exclusion constraint. No foreign keys here, they go in 04_alter."
+      changes:
+        - sqlFile:
+            path: 001_create_reservation.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/001_create_reservation.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+  - changeSet:
+      id: ddl-tables-002
+      author: Angie20000
+      labels: "HU-BOOK-001,ddl,tables"
+      comment: "idempotency_key: the key each Reserva was created with."
+      changes:
+        - sqlFile:
+            path: 002_create_idempotency_key.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/002_create_idempotency_key.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+  - changeSet:
+      id: ddl-tables-003
+      author: Angie20000
+      labels: "HU-BOOK-001,ddl,tables"
+      comment: "outbox_event: domain events of the Reserva, written in the same transaction (ADR-005)."
+      changes:
+        - sqlFile:
+            path: 003_create_outbox_event.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/003_create_outbox_event.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
