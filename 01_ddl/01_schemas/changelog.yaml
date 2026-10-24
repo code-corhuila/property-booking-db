@@ -1,1 +1,18 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: ddl-schemas-001
+      author: Angie20000
+      labels: "HU-BOOK-001,ddl,schemas"
+      comment: "Create the booking schema. Nothing of this domain lives in public."
+      changes:
+        - sqlFile:
+            path: 001_create_schema_booking.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/01_schemas/001_create_schema_booking.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
